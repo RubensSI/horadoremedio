@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.aplication.horadoremedio.model.entity.Usuario;
 import com.aplication.horadoremedio.model.repository.UsuarioRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -24,6 +25,16 @@ public class UsuarioServiceTest {
 	public void deveValidarEmail() {
 		// cenario
 		repository.deleteAll();
+		
+		// ação
+		service.validarEmail("email@gmail.com");
+	}
+	
+	@Test
+	public void deveLancarErroAoValidarQuandoExistirEmailCadastrado() {
+		// senario
+		Usuario usuario = Usuario.builder().nome("Usuario").email("email2@gmail.com").build();
+		repository.save(usuario);
 		
 		// ação
 		service.validarEmail("email@gmail.com");
