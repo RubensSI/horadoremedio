@@ -3,7 +3,7 @@ package com.aplication.horadoremedio.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -11,8 +11,8 @@ import com.aplication.horadoremedio.model.entity.Usuario;
 import com.aplication.horadoremedio.model.repository.UsuarioRepository;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 @ActiveProfiles("test")
+@DataJpaTest
 public class UsuarioServiceTest {
 	
 	@Autowired
