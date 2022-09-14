@@ -81,6 +81,17 @@ class HoradoremedioApplicationTests {
 		Assertions.assertThat(resultado.isPresent() ).isTrue();
 		
 	}
+	
+public void deveRetornarVazioAoBuscaUmUsuarioPorEmailQueNaoExistaNaBaseDeDados() {
+		
+		// cenario 
+
+		// verificacao
+		Optional<Usuario> resultado = repository.findByEmail("rubens@gmail.com");
+		
+		Assertions.assertThat(resultado.isPresent() ).isFalse();
+		
+	}
 
 	public static Usuario criarUsuario() {
 		return Usuario
