@@ -2,8 +2,9 @@ package com.aplication.horadoremedio.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -11,8 +12,8 @@ import com.aplication.horadoremedio.model.entity.Usuario;
 import com.aplication.horadoremedio.model.repository.UsuarioRepository;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 @ActiveProfiles("test")
+@DataJpaTest
 public class UsuarioServiceTest {
 	
 	@Autowired
@@ -24,6 +25,12 @@ public class UsuarioServiceTest {
 	@Test
 	public void deveValidarEmail() {
 		// cenario
+		
+		// instância mockada
+		// vai fazer os testes unitários sem fazer a chamada ao banco de dados.
+		// simula como se estivesse buscando o usuário no banco
+		UsuarioRepository usuarioRepositoryMock = Mockito.mock(UsuarioRepository.class);
+		
 		repository.deleteAll();
 		
 		// ação
