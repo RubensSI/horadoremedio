@@ -3,6 +3,7 @@ package com.aplication.horadoremedio.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		this.repository = repository;
 		
 	}
-
+	
 	// autenticar usuario, chama o médoto findByEmail da classe UsuarioRepository
 	// vericar se usuario está presente caso não esteja retorna uma exception com amensagem
 	// usuario não cadastrado
