@@ -1,5 +1,7 @@
 package com.aplication.horadoremedio.api.resource;
 
+import java.security.Provider.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aplication.horadoremedio.api.dto.UsuarioDto;
+import com.aplication.horadoremedio.exception.ErroAutenticacao;
 import com.aplication.horadoremedio.exception.RegraNegocioException;
 import com.aplication.horadoremedio.model.entity.Usuario;
 import com.aplication.horadoremedio.service.UsuarioService;
@@ -22,6 +25,20 @@ public class UsuarioResource {
 	
 	public UsuarioResource(UsuarioService service) {
 		this.service = service;
+	}
+	
+	@PostMapping("/autenticar")
+	public ResponseEntity autenticar(@RequestBody UsuarioDto dto) {
+		
+		try {
+			
+			Usuario usuarioAutenticado = service.autenticar(dto.getEmail(), dto.getSenha());
+			return ResponseEntity.ok(usuarioAutenticado);
+			
+		} catch (ErroAutenticacao e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		
 	}
 
 	@PostMapping
