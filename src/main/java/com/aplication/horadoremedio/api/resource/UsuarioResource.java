@@ -27,6 +27,12 @@ public class UsuarioResource {
 		this.service = service;
 	}
 	
+	
+	// rota para autenticacao de usuario.
+	// receber uma requisição para autentiacao de usario no formato json no metodo autenticar.
+	// retornar status ok caso usario exista no bonco, caso contrario retornar uma Exception.
+	// com uma mensagem de erro: usuario não cadastrado.
+	
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar(@RequestBody UsuarioDto dto) {
 		
@@ -41,6 +47,10 @@ public class UsuarioResource {
 		
 	}
 
+	// rota para cadastro de um novo usuário
+	// receber uma requição do tipo post em formato json contendo o os dados de usuario
+	// passar os dados para serem salvos no banco e retornar uma instâcia uma do novo usuario
+	
 	@PostMapping
 	public ResponseEntity salvar( @RequestBody UsuarioDto dto ) {
 		
