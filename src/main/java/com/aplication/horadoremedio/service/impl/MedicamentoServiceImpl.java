@@ -1,6 +1,7 @@
 package com.aplication.horadoremedio.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +12,10 @@ import com.aplication.horadoremedio.model.repository.MedicamentoRepository;
 import com.aplication.horadoremedio.service.MedicamentoService;
 
 public class MedicamentoServiceImpl implements MedicamentoService {
-	
+
 	@Autowired
 	private MedicamentoRepository repository;
-	
+
 	public MedicamentoServiceImpl(MedicamentoRepository repository) {
 		this.repository = repository;
 	}
@@ -22,20 +23,22 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	@Override
 	@Transactional
 	public Medicamento salvar(Medicamento medicamento) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return repository.save(medicamento);
 	}
 
 	@Override
+	@Transactional
 	public Medicamento atualizar(Medicamento medicamento) {
-		// TODO Auto-generated method stub
-		return null;
+		Objects.requireNonNull(medicamento.getId());
+		return repository.save(medicamento);
 	}
 
 	@Override
+	@Transactional
 	public void deletar(Medicamento medicamento) {
-		// TODO Auto-generated method stub
-		
+		Objects.requireNonNull(medicamento.getId());
+		repository.delete(medicamento);
 	}
 
 	@Override
@@ -46,8 +49,9 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 
 	@Override
 	public void atualizarStatus(Medicamento medicamento, StatusMedicamento status) {
-		// TODO Auto-generated method stub
-		
+		medicamento.setStatus(status);
+		atualizar(medicamento);
+
 	}
 
 }

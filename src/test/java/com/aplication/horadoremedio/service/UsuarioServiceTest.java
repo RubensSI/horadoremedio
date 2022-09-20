@@ -1,21 +1,13 @@
 package com.aplication.horadoremedio.service;
 
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.transaction.BeforeTransaction;
 
-import com.aplication.horadoremedio.model.entity.Usuario;
 import com.aplication.horadoremedio.model.repository.UsuarioRepository;
 import com.aplication.horadoremedio.service.impl.UsuarioServiceImpl;
 
