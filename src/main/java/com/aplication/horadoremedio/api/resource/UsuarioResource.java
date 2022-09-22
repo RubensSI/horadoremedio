@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aplication.horadoremedio.api.dto.UsuarioDto;
+import com.aplication.horadoremedio.api.dto.UsuarioDTO;
 import com.aplication.horadoremedio.exception.ErroAutenticacao;
 import com.aplication.horadoremedio.exception.RegraNegocioException;
 import com.aplication.horadoremedio.model.entity.Usuario;
@@ -33,7 +33,7 @@ public class UsuarioResource {
 	// com uma mensagem de erro: usuario não cadastrado.
 
 	@PostMapping("/autenticar")
-	public ResponseEntity autenticar(@RequestBody UsuarioDto dto) {
+	public ResponseEntity autenticar(@RequestBody UsuarioDTO dto) {
 
 		try {
 
@@ -53,7 +53,7 @@ public class UsuarioResource {
 	// novo usuario
 
 	@PostMapping
-	public ResponseEntity salvar(@RequestBody UsuarioDto dto) {
+	public ResponseEntity salvar(@RequestBody UsuarioDTO dto) {
 
 		Usuario usuario = Usuario.builder()
 				.nome(dto.getNome())

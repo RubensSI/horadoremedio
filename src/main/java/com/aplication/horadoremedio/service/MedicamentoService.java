@@ -16,5 +16,7 @@ public interface MedicamentoService {
 	List<Medicamento> buscar(Medicamento medicamentoFiltro);
 
 	void atualizarStatus(Medicamento medicamento, StatusMedicamento status);
+	
+	void validar (Medicamento medicamento);
 
 }
