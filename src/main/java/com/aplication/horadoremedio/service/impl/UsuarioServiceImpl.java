@@ -37,7 +37,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		// se usuario existir, verificar se a senha corresponde a senha casdatrada no email do uusario
 		if (!usuario.get().getSenha().equals(senha)) {
-			throw new ErroAutenticacao("Senha ínvalida");
+			throw new ErroAutenticacao("Senha inválida.");
 		}
 		
 		// retornar a instancia do usuario.
