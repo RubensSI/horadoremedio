@@ -1,7 +1,5 @@
 package com.aplication.horadoremedio.service;
 
-import org.springframework.stereotype.Service;
-
 import com.aplication.horadoremedio.model.entity.Usuario;
 
 public interface UsuarioService {

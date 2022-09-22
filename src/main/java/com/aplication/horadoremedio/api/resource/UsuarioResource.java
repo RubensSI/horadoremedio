@@ -1,7 +1,5 @@
 package com.aplication.horadoremedio.api.resource;
 
-import java.security.Provider.Service;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,47 +17,50 @@ import com.aplication.horadoremedio.service.UsuarioService;
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioResource {
-	
+
 	@Autowired
 	private UsuarioService service;
-	
+
 	public UsuarioResource(UsuarioService service) {
 		this.service = service;
 	}
-	
-	
+
 	// rota para autenticacao de usuario.
-	// receber uma requisição para autentiacao de usario no formato json no metodo autenticar.
-	// retornar status ok caso usario exista no bonco, caso contrario retornar uma Exception.
+	// receber uma requisição para autentiacao de usario no formato json no metodo
+	// autenticar.
+	// retornar status ok caso usario exista no bonco, caso contrario retornar uma
+	// Exception.
 	// com uma mensagem de erro: usuario não cadastrado.
-	
+
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar(@RequestBody UsuarioDto dto) {
-		
+
 		try {
-			
+
 			Usuario usuarioAutenticado = service.autenticar(dto.getEmail(), dto.getSenha());
 			return ResponseEntity.ok(usuarioAutenticado);
-			
+
 		} catch (ErroAutenticacao e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		
+
 	}
 
 	// rota para cadastro de um novo usuário
-	// receber uma requição do tipo post em formato json contendo o os dados de usuario
-	// passar os dados para serem salvos no banco e retornar uma instâcia uma do novo usuario
-	
+	// receber uma requição do tipo post em formato json contendo o os dados de
+	// usuario
+	// passar os dados para serem salvos no banco e retornar uma instâcia uma do
+	// novo usuario
+
 	@PostMapping
-	public ResponseEntity salvar( @RequestBody UsuarioDto dto ) {
-		
+	public ResponseEntity salvar(@RequestBody UsuarioDto dto) {
+
 		Usuario usuario = Usuario.builder()
 				.nome(dto.getNome())
 				.email(dto.getEmail())
 				.telefone(dto.getTelefone())
 				.senha(dto.getSenha()).build();
-		
+
 		try {
 			Usuario usuarioSalvo = service.salvarUsuario(usuario);
 			return new ResponseEntity(usuarioSalvo, HttpStatus.CREATED);
@@ -67,5 +68,5 @@ public class UsuarioResource {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-	
+
 }
