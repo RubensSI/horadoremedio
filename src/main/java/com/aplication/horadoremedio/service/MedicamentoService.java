@@ -1,6 +1,7 @@
 package com.aplication.horadoremedio.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.aplication.horadoremedio.model.entity.Medicamento;
 import com.aplication.horadoremedio.model.enums.StatusMedicamento;
@@ -18,5 +19,7 @@ public interface MedicamentoService {
 	void atualizarStatus(Medicamento medicamento, StatusMedicamento status);
 	
 	void validar (Medicamento medicamento);
+	
+	Optional<Medicamento> obterPorId(Long id);
 
 }

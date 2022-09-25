@@ -1,5 +1,7 @@
 package com.aplication.horadoremedio.service;
 
+import java.util.Optional;
+
 import com.aplication.horadoremedio.model.entity.Usuario;
 
 public interface UsuarioService {
@@ -17,4 +19,6 @@ public interface UsuarioService {
 	// verificar se email está salvo na base de dados
 	// caso estaja retone uma menssaegem de erro
 	void validarEmail(String email);
+	
+	Optional<Usuario> obterPorId(Long id);
 }

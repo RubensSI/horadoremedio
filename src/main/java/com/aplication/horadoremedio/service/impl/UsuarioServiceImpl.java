@@ -71,5 +71,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 
 	}
+	
+	
+	// verificar se usuario está presente na base de dados
+	// se sim retorna o id do usuario
+	@Override
+	public Optional<Usuario> obterPorId(Long id) {
+		return repository.findById(id);
+	}
 
 }

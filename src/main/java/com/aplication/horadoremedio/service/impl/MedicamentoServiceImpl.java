@@ -2,6 +2,7 @@ package com.aplication.horadoremedio.service.impl;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -26,7 +27,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	public MedicamentoServiceImpl(MedicamentoRepository repository) {
 		this.repository = repository;
 	}
-	
+
 	// abri uma transação para salvar o usuario na base da dados
 	// varificar se o usario está com todos dados carretos para depois commitar
 	// os dados caso comtrário faz o rollback da transação.
@@ -39,7 +40,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 		return repository.save(medicamento);
 	}
 
-	// garantir que a transação aconteça  de forma correta
+	// garantir que a transação aconteça de forma correta
 	// caso isso não ocorra fazer rollback da transação
 	// atualizar um medicamento pelo
 	// garantir que o id não vai vir nulo
@@ -62,9 +63,8 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Medicamento> buscar(Medicamento medicamentoFiltro) {
-		Example examle = Example.of(medicamentoFiltro, ExampleMatcher.matching()
-				.withIgnoreCase()
-				.withStringMatcher(StringMatcher.CONTAINING));
+		Example examle = Example.of(medicamentoFiltro,
+				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
 		return repository.findAll(examle);
 	}
 
@@ -77,23 +77,28 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 
 	@Override
 	public void validar(Medicamento medicamento) {
-		
+
 		if (medicamento.getNome() == null || medicamento.getNome().trim().equals("")) {
 			throw new RegraNegocioException("Informe o Nome do medicamento");
 		}
-		
-		if (medicamento.getDescricao() == null || medicamento.getDescricao().trim().equals("")) {
-			throw new RegraNegocioException("Informe uma Descrição válida.");
-		}
-		
+
+//		if (medicamento.getDescricao() == null || medicamento.getDescricao().trim().equals("")) {
+//			throw new RegraNegocioException("Informe uma Descrição válida.");
+//		}
+
 		if (medicamento.getUsuario() == null || medicamento.getUsuario().getId() == null) {
 			throw new RegraNegocioException("Informe o Usuário.");
 		}
-		
+
 		if (medicamento.getTipo() == null) {
 			throw new RegraNegocioException("Informe o tipo do Medicamento");
 		}
-		
+
+	}
+
+	@Override
+	public Optional<Medicamento> obterPorId(Long id) {
+		return repository.findById(id);
 	}
 
 }

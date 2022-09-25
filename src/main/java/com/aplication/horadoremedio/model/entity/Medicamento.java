@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.aplication.horadoremedio.model.enums.StatusMedicamento;
 import com.aplication.horadoremedio.model.enums.TipoUsoMedicamento;
@@ -27,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "medicamentos")
+@Table(name = "medicamento")
 @Data
 @Builder
 @NoArgsConstructor
@@ -48,10 +47,9 @@ public class Medicamento {
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
+
 	@Column(name = "data_cadastro")
+	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
 	private LocalDate dataCadastro;
 	
 	@Column(name = "tipo")
