@@ -1,8 +1,6 @@
 package com.aplication.horadoremedio.model.entity;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,22 +24,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HoraMedicamento {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "descricao")
 	private String descricao;
-	
-	private LocalDate data;
-	private LocalDate hora;
-	
+
+	@Column(name = "data_hora")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	private Date dataHora;
+
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario idUsuario;
-	
-	
+	@JoinColumn(name = "id_medicamento")
+	private Usuario idMedicamento;
 
 }
