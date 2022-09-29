@@ -1,8 +1,10 @@
 package com.aplication.horadoremedio.service.impl;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aplication.horadoremedio.exception.RegraNegocioException;
 import com.aplication.horadoremedio.model.entity.HoraMedicamento;
@@ -19,14 +21,21 @@ public class HoraMedicamentoServiceImpl implements HoraMedicamentoService {
 	}
 
 	@Override
+	@Transactional
 	public HoraMedicamento salvar(HoraMedicamento horaMedicamento) {
-		// TODO Auto-generated method stub
-		return null;
+		// validar as informaçõe passada por pâmetro para o método
+		validar(horaMedicamento);
+	
+		// presistir as informaçoes no banco de dados
+		return repository.save(horaMedicamento);
 	}
 
+	// fazer a exclusão da hora medicamento do banco de dados.
 	@Override
+	@Transactional
 	public void deletar(HoraMedicamento horaMedicamento) {
-		// TODO Auto-generated method stub
+		Objects.requireNonNull(horaMedicamento.getId());
+		repository.delete(horaMedicamento);
 
 	}
 

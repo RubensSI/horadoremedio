@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
@@ -36,6 +35,7 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	@Transactional
 	public Medicamento salvar(Medicamento medicamento) {
 		validar(medicamento);
+		validarNomeMedicameto(medicamento.getNome());
 		medicamento.setStatus(StatusMedicamento.PENDENTE);
 		return repository.save(medicamento);
 	}
@@ -99,6 +99,16 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	@Override
 	public Optional<Medicamento> obterPorId(Long id) {
 		return repository.findById(id);
+	}
+
+	@Override
+	public void validarNomeMedicameto(String nome) {
+		
+		boolean exists = repository.existsByNome(nome);
+		
+		if (exists) {
+			throw new RegraNegocioException("Já existe um medicamento cadastrado com este nome");
+		}
 	}
 
 }

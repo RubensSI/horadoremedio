@@ -37,8 +37,10 @@ public class MedicamentoResource {
 	private final UsuarioService usuarioService;
 
 	@GetMapping
-	public ResponseEntity buscar(@RequestParam(value = "descricao", required = false) String descricao,
-			@RequestParam(value = "nome", required = false) String nome, @RequestParam("usuario") Long idUsuario) {
+	public ResponseEntity buscar(
+			@RequestParam(value = "descricao", required = false) String descricao,
+			@RequestParam(value = "nome", required = false) String nome, 
+			@RequestParam("usuario") Long idUsuario) {
 		Medicamento medicamentofiltro = new Medicamento();
 		medicamentofiltro.setNome(nome);
 		medicamentofiltro.setDescricao(descricao);
