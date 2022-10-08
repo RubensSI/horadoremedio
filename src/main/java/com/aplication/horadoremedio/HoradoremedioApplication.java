@@ -9,5 +9,5 @@ public class HoradoremedioApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HoradoremedioApplication.class, args);
 	}
-
+	
 }

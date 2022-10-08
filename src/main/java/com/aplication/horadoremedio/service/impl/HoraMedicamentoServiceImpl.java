@@ -45,7 +45,7 @@ public class HoraMedicamentoServiceImpl implements HoraMedicamentoService {
 		// verificar se o medicameno está na base da dados.
 		// se estivar trazo id do medicamento.
 		// caso contrário retorna uma mensagem informando que o medicamewnto não esta presente.
-		if (horaMedicamento.getIdMedicamento() == null || horaMedicamento.getIdMedicamento().getId() == null) {
+		if (horaMedicamento.getMedicamento() == null || horaMedicamento.getMedicamento().getId() == null) {
 			throw new RegraNegocioException("Informe o Medicamento.");
 		}
 

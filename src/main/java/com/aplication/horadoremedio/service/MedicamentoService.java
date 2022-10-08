@@ -20,8 +20,6 @@ public interface MedicamentoService {
 	
 	void validar (Medicamento medicamento);
 	
-	public void validarNomeMedicameto(String nome);
-	
 	Optional<Medicamento> obterPorId(Long id);
 
 }

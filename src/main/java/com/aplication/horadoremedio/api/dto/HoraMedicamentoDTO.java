@@ -8,9 +8,8 @@ import lombok.Data;
 @Data
 @Builder
 public class HoraMedicamentoDTO {
-	
 	private Long id;
 	private String descricao;
-	private Date dataHora;
-	private Long idMedicamento;
+	private Date hora;
+	private Long Medicamento;
 }

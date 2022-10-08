@@ -35,7 +35,6 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	@Transactional
 	public Medicamento salvar(Medicamento medicamento) {
 		validar(medicamento);
-		validarNomeMedicameto(medicamento.getNome());
 		medicamento.setStatus(StatusMedicamento.PENDENTE);
 		return repository.save(medicamento);
 	}
@@ -63,9 +62,9 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Medicamento> buscar(Medicamento medicamentoFiltro) {
-		Example examle = Example.of(medicamentoFiltro,
+		Example example = Example.of(medicamentoFiltro,
 				ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
-		return repository.findAll(examle);
+		return repository.findAll(example);
 	}
 
 	@Override
@@ -82,9 +81,9 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 			throw new RegraNegocioException("Informe o Nome do medicamento");
 		}
 
-//		if (medicamento.getDescricao() == null || medicamento.getDescricao().trim().equals("")) {
-//			throw new RegraNegocioException("Informe uma Descrição válida.");
-//		}
+		if (medicamento.getDescricao() == null || medicamento.getDescricao().trim().equals("")) {
+			throw new RegraNegocioException("Informe uma Descrição válida.");
+		}
 
 		if (medicamento.getUsuario() == null || medicamento.getUsuario().getId() == null) {
 			throw new RegraNegocioException("Informe o Usuário.");
@@ -99,16 +98,6 @@ public class MedicamentoServiceImpl implements MedicamentoService {
 	@Override
 	public Optional<Medicamento> obterPorId(Long id) {
 		return repository.findById(id);
-	}
-
-	@Override
-	public void validarNomeMedicameto(String nome) {
-		
-		boolean exists = repository.existsByNome(nome);
-		
-		if (exists) {
-			throw new RegraNegocioException("Já existe um medicamento cadastrado com este nome");
-		}
 	}
 
 }
